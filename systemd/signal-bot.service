@@ -1,0 +1,15 @@
+[Unit]
+Description=Signal Bot
+After=network.target
+
+[Service]
+Type=simple
+User=your-user
+WorkingDirectory=/path/to/signal-bot
+ExecStart=/path/to/.local/bin/uv run python -m signal_bot
+Restart=on-failure
+RestartSec=10
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
