@@ -118,6 +118,8 @@ Commands are messages that start with `/` followed by a keyword. The bot routes 
 | Command | App | Description |
 |---|---|---|
 | `/test` | Test App | Reverses the text you send (e.g. `/test hello` → `olleh`) |
+| `/date` | Date App | Shows current date/time. Use `/date London` for a city, `/date set Tokyo, JP` to save a default |
+| `/help` | Help App | Lists all available commands and their descriptions |
 
 > 💡 **Adding your own command app:** Implement the command app interface, register it with the bot, and your new `/command` is ready to go. Each app is a standalone module — no changes to the core bot required.
 

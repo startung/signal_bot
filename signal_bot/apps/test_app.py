@@ -6,5 +6,9 @@ class TestApp(CommandApp):
     def name(self) -> str:
         return "test"
 
-    def handle(self, args: str) -> str:
+    @property
+    def description(self) -> str:
+        return "Reverses the text you send"
+
+    def handle(self, args: str, sender: str = "") -> str:
         return args[::-1]

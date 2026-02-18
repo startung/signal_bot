@@ -9,6 +9,8 @@ def test_create_bot_uses_config():
         phone_number="+440001111111",
         cli_path="signal-cli",
         log_dir="/tmp/test-logs",
+        allowed_senders=None,
+        data_dir="/tmp/test-data",
     )
     bot = create_bot(config)
     assert bot.account == "+440001111111"
@@ -21,6 +23,8 @@ def test_create_bot_registers_test_app():
         phone_number="+440001111111",
         cli_path="signal-cli",
         log_dir="/tmp/test-logs",
+        allowed_senders=None,
+        data_dir="/tmp/test-data",
     )
     bot = create_bot(config)
     app = bot.registry.get("test")
@@ -33,6 +37,8 @@ def test_create_bot_with_custom_cli_path():
         phone_number="+440001111111",
         cli_path="flatpak run org.asamk.SignalCli",
         log_dir="logs",
+        allowed_senders=None,
+        data_dir="/tmp/test-data",
     )
     bot = create_bot(config)
     assert bot.signal_cli._cli_parts == ["flatpak", "run", "org.asamk.SignalCli"]

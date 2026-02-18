@@ -28,6 +28,16 @@ This document tracks the development roadmap for Signal Bot. Each step will be i
 
 12. **Deployment setup** — Add systemd service file, document production deployment, and handle graceful shutdown.
 
+13. **Sender whitelist** — Only process messages from a configurable list of allowed phone numbers. Messages from unknown senders are ignored (and optionally logged).
+
+14. **Mode switching** — Allow a sender to enter a command app's "mode" with `/command start` so that all subsequent messages are routed to that app without a prefix, until `/command end` exits the mode.
+
+15. **Date app** — A simple `/date` command app that returns the current date and time.
+
+16. **Help app** — A `/help` command app that lists all registered commands and their descriptions.
+
+17. **Persistent date defaults** — Persist `/date set` defaults to a JSON file in a configurable `DATA_DIR` so they survive restarts.
+
 ## Status Key
 
 - ⬜ Not started
@@ -50,3 +60,11 @@ This document tracks the development roadmap for Signal Bot. Each step will be i
 | 10 | Configuration | ✅ |
 | 11 | Test app (example command app) | ✅ |
 | 12 | Deployment setup | ✅ |
+| | **v1.0.0 release** | 🎉 |
+| 13 | Sender whitelist | ✅ |
+| 14 | Mode switching | ✅ |
+| 15 | Date app | ✅ |
+| 16 | Help app | ✅ |
+| | **v1.1.0 release** | 🎉 |
+| 17 | Persistent date defaults | ✅ |
+| | **v1.1.1 release** | 🎉 |

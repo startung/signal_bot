@@ -12,3 +12,6 @@ class AppRegistry:
 
     def get(self, command_name: str) -> CommandApp | None:
         return self._apps.get(command_name)
+
+    def all_apps(self) -> list[CommandApp]:
+        return list(self._apps.values())

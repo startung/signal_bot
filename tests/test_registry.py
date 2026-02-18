@@ -8,7 +8,11 @@ class FakeAppA(CommandApp):
     def name(self) -> str:
         return "alpha"
 
-    def handle(self, args: str) -> str:
+    @property
+    def description(self) -> str:
+        return "App A"
+
+    def handle(self, args: str, sender: str = "") -> str:
         return "a"
 
 
@@ -17,7 +21,11 @@ class FakeAppB(CommandApp):
     def name(self) -> str:
         return "beta"
 
-    def handle(self, args: str) -> str:
+    @property
+    def description(self) -> str:
+        return "App B"
+
+    def handle(self, args: str, sender: str = "") -> str:
         return "b"
 
 
@@ -26,7 +34,11 @@ class DuplicateApp(CommandApp):
     def name(self) -> str:
         return "alpha"
 
-    def handle(self, args: str) -> str:
+    @property
+    def description(self) -> str:
+        return "Duplicate"
+
+    def handle(self, args: str, sender: str = "") -> str:
         return "duplicate"
 
 

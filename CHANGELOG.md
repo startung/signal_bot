@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.1] - 2026-02-18
+
+### Added
+- Persistent `/date set` defaults — saved to `DATA_DIR/date_defaults.json` and restored on startup
+- `DATA_DIR` config option for persistent app data (default: `data`)
+
+## [1.1.0] - 2026-02-18
+
+### Added
+- Sender whitelist via `ALLOWED_SENDERS` env var — unauthorized messages logged separately to `logs/unauthorized/`
+- Mode switching: `/command start` enters a mode routing all plain messages to that app, `/command end` exits
+- `/date` command app — shows date/time for a city, supports per-sender defaults via `/date set City, Country`
+- `/help` command app — lists all registered commands and their descriptions
+- `description` property added to `CommandApp` interface
+- `sender` parameter added to `CommandApp.handle()` interface for per-user state
+- `all_apps()` method on `AppRegistry` to list registered apps
+
 ## [1.0.0] - 2026-02-17
 
 ### Added
