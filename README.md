@@ -123,8 +123,6 @@ Commands are messages that start with `/` followed by a keyword. The bot routes 
 | `/date` | Date App | Shows current date/time. Use `/date London` for a city, `/date set Tokyo, JP` to save a default |
 | `/help` | Help App | Lists all available commands and their descriptions |
 
-> 💡 **Adding your own command app:** Implement the command app interface, register it with the bot, and your new `/command` is ready to go. Each app is a standalone module — no changes to the core bot required.
-
 ## 🏗️ Architecture
 
 ```
@@ -142,6 +140,61 @@ signal_bot/
 3. If a message starts with `/`, the command router looks up the registered app
 4. The matched app processes the command and returns a response
 5. The bot sends the response back via Signal
+
+## 🔌 Developing a New App
+
+Any new command can be added by creating a single file in `signal_bot/apps/` and registering it in `signal_bot/main.py`. No changes to the core bot are required.
+
+### 1. The `CommandApp` interface
+
+All apps must subclass `CommandApp` (defined in `signal_bot/app_interface.py`) and implement three members:
+
+| Member | Type | Description |
+|---|---|---|
+| `name` | `str` property | The command keyword (without `/`). E.g. `"weather"` registers `/weather`. Must be unique. |
+| `description` | `str` property | A short description shown by `/help`. |
+| `handle(args, sender)` | method | Called when the command is received. `args` is everything after the command keyword; `sender` is the sender's phone number. Must return a `str` response. |
+
+### 2. Create the app file
+
+Place your app in `signal_bot/apps/your_app.py`:
+
+```python
+from signal_bot.app_interface import CommandApp
+
+class YourApp(CommandApp):
+    @property
+    def name(self) -> str:
+        return "yourcommand"
+
+    @property
+    def description(self) -> str:
+        return "A short description of what /yourcommand does"
+
+    def handle(self, args: str, sender: str = "") -> str:
+        # args  — everything the user typed after /yourcommand
+        # sender — the sender's phone number (useful for per-user state)
+        return f"You said: {args}"
+```
+
+### 3. Register the app
+
+In `signal_bot/main.py`, import your app and add it to `create_bot()`:
+
+```python
+from signal_bot.apps.your_app import YourApp
+
+def create_bot(config: Config) -> Bot:
+    ...
+    bot.register_app(YourApp())
+    ...
+```
+
+That's it — your `/yourcommand` is now live and will appear in `/help` automatically.
+
+### Mode support
+
+Apps get mode support for free. Users can send `/yourcommand start` to enter a mode where all subsequent messages (without a `/` prefix) are forwarded directly to your app's `handle()` method, with `args` set to the full message body. They exit with `/yourcommand end`.
 
 ## 🧪 Testing
 
