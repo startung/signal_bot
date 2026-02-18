@@ -1,4 +1,6 @@
-# 🤖 Signal Bot
+# 🤖 Signaalbot
+
+> **Not a typo!** *Signaal* is the Dutch word for signal.
 
 A lightweight, extensible Signal bot built in Python. It sends and receives messages, logs everything, and routes `/command`-style messages to pluggable apps.
 
@@ -20,8 +22,8 @@ A lightweight, extensible Signal bot built in Python. It sends and receives mess
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/signal-bot.git
-cd signal-bot
+git clone https://github.com/your-username/signaalbot.git
+cd signaalbot
 
 # Install dependencies with uv
 uv sync
@@ -163,9 +165,9 @@ uv run pytest -k "test_command"
 1. Create a service file:
 
 ```ini
-# /etc/systemd/system/signal-bot.service
+# /etc/systemd/system/signaalbot.service
 [Unit]
-Description=Signal Bot
+Description=Signaalbot
 After=network.target
 
 [Service]
@@ -183,14 +185,14 @@ WantedBy=multi-user.target
 2. Enable and start:
 
 ```bash
-sudo systemctl enable signal-bot
-sudo systemctl start signal-bot
+sudo systemctl enable signaalbot
+sudo systemctl start signaalbot
 ```
 
 3. Check logs:
 
 ```bash
-journalctl -u signal-bot -f
+journalctl -u signaalbot -f
 ```
 
 > 🛡️ **Tip:** Run the bot on a Raspberry Pi or a cheap VPS for a low-cost always-on setup.

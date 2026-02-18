@@ -1,6 +1,6 @@
 # Development Plan
 
-This document tracks the development roadmap for Signal Bot. Each step will be implemented using test-driven development (TDD): write tests first, then implement to make them pass.
+This document tracks the development roadmap for Signaalbot. Each step will be implemented using test-driven development (TDD): write tests first, then implement to make them pass.
 
 ## Steps
 
