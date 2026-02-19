@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.2] - 2026-02-19
+
+### Added
+- Docker Hub descriptions for `startung/signaalbot` and `startung/signal-cli` (`docker/hub-signaalbot.md`, `docker/hub-signal-cli.md`)
+- GitHub Actions workflow now syncs Docker Hub descriptions automatically on version tag push
+
 ## [2.0.1] - 2026-02-19
 
 ### Fixed

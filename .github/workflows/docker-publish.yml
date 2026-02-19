@@ -44,3 +44,19 @@ jobs:
           tags: |
             startung/signal-cli:latest
             startung/signal-cli:${{ steps.version.outputs.VERSION }}
+
+      - name: Update signaalbot Docker Hub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: startung/signaalbot
+          readme-filepath: docker/hub-signaalbot.md
+
+      - name: Update signal-cli Docker Hub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: startung/signal-cli
+          readme-filepath: docker/hub-signal-cli.md
