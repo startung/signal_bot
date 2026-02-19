@@ -11,6 +11,9 @@ class Config:
     allowed_senders: list[str] | None
     data_dir: str
     debug: bool = False
+    signal_cli_mode: str = "subprocess"
+    signal_cli_host: str = "localhost"
+    signal_cli_port: int = 7583
 
 
 def load_config(use_dotenv: bool = True, debug: bool | None = None) -> Config:
@@ -28,6 +31,9 @@ def load_config(use_dotenv: bool = True, debug: bool | None = None) -> Config:
         allowed_senders=_parse_allowed_senders(os.environ.get("ALLOWED_SENDERS", "")),
         data_dir=os.environ.get("DATA_DIR", "data"),
         debug=debug,
+        signal_cli_mode=os.environ.get("SIGNAL_CLI_MODE", "subprocess"),
+        signal_cli_host=os.environ.get("SIGNAL_CLI_HOST", "localhost"),
+        signal_cli_port=int(os.environ.get("SIGNAL_CLI_PORT", "7583")),
     )
 
 

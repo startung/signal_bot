@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.0] - 2026-02-19
+
+### Added
+- Docker Compose deployment with signaalbot and signal-cli as separate containers
+- `signal_cli_jsonrpc.py` - JSON-RPC over TCP backend for communicating with signal-cli daemon
+- `Dockerfile` for signaalbot and `docker/signal-cli/Dockerfile` for signal-cli
+- GitHub Actions workflow to automatically build and push both images to Docker Hub on version tag
+- `SIGNAL_CLI_MODE`, `SIGNAL_CLI_HOST`, `SIGNAL_CLI_PORT` config options for selecting the backend
+- Pre-built images published to Docker Hub (`startung/signaalbot`, `startung/signal-cli`)
+
 ## [1.3.2] - 2026-02-19
 
 ### Changed

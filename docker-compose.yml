@@ -1,0 +1,28 @@
+services:
+  signal-cli:
+    image: startung/signal-cli:latest
+    build: docker/signal-cli
+    command: -a ${SIGNAL_PHONE_NUMBER} daemon --tcp 0.0.0.0:7583
+    volumes:
+      - signal-data:/root/.local/share/signal-cli
+    restart: unless-stopped
+
+  signaalbot:
+    image: startung/signaalbot:latest
+    build: .
+    depends_on:
+      - signal-cli
+    env_file: .env
+    environment:
+      SIGNAL_CLI_MODE: jsonrpc
+      SIGNAL_CLI_HOST: signal-cli
+      SIGNAL_CLI_PORT: "7583"
+      LOG_DIR: /data/logs
+      DATA_DIR: /data/app
+    volumes:
+      - bot-data:/data
+    restart: unless-stopped
+
+volumes:
+  signal-data:
+  bot-data:

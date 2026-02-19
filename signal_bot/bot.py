@@ -12,9 +12,9 @@ logger = logging.getLogger(__name__)
 
 
 class Bot:
-    def __init__(self, account: str, cli_path: str = "signal-cli", log_dir: Path | str = "logs", allowed_senders: list[str] | None = None) -> None:
+    def __init__(self, account: str, cli_path: str = "signal-cli", log_dir: Path | str = "logs", allowed_senders: list[str] | None = None, backend=None) -> None:
         self.account = account
-        self.signal_cli = SignalCli(account=account, cli_path=cli_path)
+        self.signal_cli = backend if backend is not None else SignalCli(account=account, cli_path=cli_path)
         self.registry = AppRegistry()
         self.log_dir = Path(log_dir)
         self.allowed_senders = allowed_senders

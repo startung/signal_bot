@@ -83,4 +83,5 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v1.3.0 release** | 🎉 |
 | | **v1.3.1 release** | 🎉 |
 | | **v1.3.2 release** | 🎉 |
-| 21 | Docker support | ⬜ |
+| 21 | Docker support | ✅ |
+| | **v2.0.0 release** | 🎉 |

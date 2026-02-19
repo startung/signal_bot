@@ -18,7 +18,23 @@ A lightweight, extensible Signal bot built in Python. It sends and receives mess
 - [signal-cli](https://github.com/AsamK/signal-cli) installed and configured
 - A phone number registered with Signal (or an existing Signal account to link)
 
-## 🚀 Installation
+## 🐳 Deploy with Docker (recommended)
+
+Pre-built images are available on Docker Hub. You only need Docker and the compose file:
+
+```bash
+curl -O https://raw.githubusercontent.com/startung/signaalbot/main/docker-compose.yml
+```
+
+Create a `.env` file with at minimum:
+```
+SIGNAL_PHONE_NUMBER=+YOUR_PHONE_NUMBER
+ALLOWED_SENDERS=+YOUR_NUMBER
+```
+
+Then follow the [Docker deployment guide](https://github.com/startung/signaalbot/wiki/Configuration-Reference#deployment-with-docker-compose) in the wiki for signal-cli registration and startup.
+
+## 🚀 Install from source
 
 ```bash
 git clone https://github.com/startung/signaalbot.git
@@ -44,7 +60,7 @@ uv run python -m signal_bot --debug
 
 ### CLI mode
 
-The `--cli` flag starts an interactive REPL for testing command routing without signal-cli running. Messages are simulated from a fixed fake sender (`+440000000000`) — add it to `ALLOWED_SENDERS` in `.env` so it isn't blocked by the whitelist.
+The `--cli` flag starts an interactive REPL for testing command routing without signal-cli running. Messages are simulated from a fixed fake sender (`+440000000000`) - add it to `ALLOWED_SENDERS` in `.env` so it isn't blocked by the whitelist.
 
 ```
 Signaalbot CLI - bot account: +441234567890
