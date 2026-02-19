@@ -40,6 +40,10 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 
 18. **CLI testing interface** — An interactive REPL mode (`--cli` flag) for testing the bot without signal-cli, simulating messages from a fake sender.
 
+19. **Debug logging** — Integrate Python stdlib `logging` throughout the codebase. Each module gets its own `logging.getLogger(__name__)` logger. Enabled via `--debug` CLI flag or `DEBUG=true` env var (added to `Config`). Logs key internal events: message receipt, skipped envelopes, authorization checks, command dispatch, mode transitions, and missing responses. Log level is `DEBUG` when enabled, `WARNING` otherwise.
+
+20. **GitHub wiki** — Create a `wiki/` directory with four Markdown files matching GitHub wiki conventions (pushable to `<repo>.wiki.git`): `Home.md` (overview, install, quick start), `Developing-a-New-App.md` (CommandApp interface, mode support, persistence pattern), `Configuration-Reference.md` (all `.env` variables, signal-cli setup, systemd deployment), and `Architecture.md` (message flow, module responsibilities, mode system).
+
 ## Status Key
 
 - ⬜ Not started
@@ -72,3 +76,5 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v1.1.1 release** | 🎉 |
 | 18 | CLI testing interface | ✅ |
 | | **v1.2.0 release** | 🎉 |
+| 19 | Debug logging | ✅ |
+| 20 | GitHub wiki | ✅ |

@@ -10,20 +10,24 @@ class Config:
     log_dir: str
     allowed_senders: list[str] | None
     data_dir: str
+    debug: bool = False
 
 
-def load_config(use_dotenv: bool = True) -> Config:
+def load_config(use_dotenv: bool = True, debug: bool | None = None) -> Config:
     if use_dotenv:
         load_dotenv()
     phone_number = os.environ.get("SIGNAL_PHONE_NUMBER")
     if not phone_number:
         raise ValueError("SIGNAL_PHONE_NUMBER environment variable is required")
+    if debug is None:
+        debug = os.environ.get("DEBUG", "").lower() in ("1", "true")
     return Config(
         phone_number=phone_number,
         cli_path=os.environ.get("SIGNAL_CLI_PATH", "signal-cli"),
         log_dir=os.environ.get("LOG_DIR", "logs"),
         allowed_senders=_parse_allowed_senders(os.environ.get("ALLOWED_SENDERS", "")),
         data_dir=os.environ.get("DATA_DIR", "data"),
+        debug=debug,
     )
 
 

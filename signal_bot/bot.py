@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from datetime import datetime, timezone
 from signal_bot.app_interface import CommandApp
@@ -6,6 +7,8 @@ from signal_bot.message import Message, Direction
 from signal_bot.registry import AppRegistry
 from signal_bot.router import route_command
 from signal_bot.signal_cli import SignalCli
+
+logger = logging.getLogger(__name__)
 
 
 class Bot:
@@ -31,9 +34,11 @@ class Bot:
         if parsed is None:
             return None
         if parsed.args == "start" and self.registry.get(parsed.command):
+            logger.debug("Mode start: sender=%s entering command=%s", msg.sender, parsed.command)
             self._modes[msg.sender] = parsed.command
             return f"Entered {parsed.command} mode. All messages will be sent to /{parsed.command}. Send /{parsed.command} end to exit."
         if parsed.args == "end" and self._modes.get(msg.sender) == parsed.command:
+            logger.debug("Mode end: sender=%s exiting command=%s", msg.sender, parsed.command)
             del self._modes[msg.sender]
             return f"Exited {parsed.command} mode."
         return None
@@ -53,6 +58,7 @@ class Bot:
         messages = self.signal_cli.receive()
         for msg in messages:
             if not self._is_authorized(msg.sender):
+                logger.debug("Unauthorized sender %s — dropping message", msg.sender)
                 unauthorized_dir = self.log_dir / "unauthorized"
                 unauthorized_dir.mkdir(parents=True, exist_ok=True)
                 log_message(msg, unauthorized_dir)
@@ -66,6 +72,9 @@ class Bot:
             if response is None and msg.sender in self._modes:
                 app = self.registry.get(self._modes[msg.sender])
                 if app is not None:
+                    logger.debug("Dispatching to mode app=%s for sender=%s", app.name, msg.sender)
                     response = app.handle(msg.body, sender=msg.sender)
             if response is not None:
                 self._send_response(msg.sender, response)
+            else:
+                logger.debug("No response for message from %s", msg.sender)

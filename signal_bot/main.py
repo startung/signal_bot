@@ -1,3 +1,4 @@
+import logging
 import signal
 import sys
 import time
@@ -10,6 +11,8 @@ from signal_bot.router import route_command
 from signal_bot.apps.test_app import TestApp
 from signal_bot.apps.date_app import DateApp
 from signal_bot.apps.help_app import HelpApp
+
+logger = logging.getLogger(__name__)
 
 POLL_INTERVAL = 5
 CLI_FAKE_SENDER = "+440000000000"
@@ -47,6 +50,10 @@ def _cli_send(bot: Bot, recipient: str, body: str) -> None:
 
 
 def run_cli(config: Config) -> None:
+    logging.basicConfig(
+        level=logging.DEBUG if config.debug else logging.WARNING,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
     bot = create_bot(config)
     sender = CLI_FAKE_SENDER
 
@@ -99,24 +106,28 @@ def run_cli(config: Config) -> None:
     print("Bye.")
 
 
-def run():
+def run(debug: bool | None = None):
     global _running
     _running = True
 
-    config = load_config()
+    config = load_config(debug=debug)
+    logging.basicConfig(
+        level=logging.DEBUG if config.debug else logging.WARNING,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
     bot = create_bot(config)
 
     signal.signal(signal.SIGINT, _shutdown)
     signal.signal(signal.SIGTERM, _shutdown)
 
-    print(f"Signal bot started for {config.phone_number}")
-    print(f"Polling every {POLL_INTERVAL}s. Press Ctrl+C to stop.")
+    logger.info("Signal bot started for %s", config.phone_number)
+    logger.info("Polling every %ss. Press Ctrl+C to stop.", POLL_INTERVAL)
 
     while _running:
         try:
             bot.process_messages()
         except Exception as e:
-            print(f"Error processing messages: {e}", file=sys.stderr)
+            logger.error("Error processing messages: %s", e)
         time.sleep(POLL_INTERVAL)
 
-    print("Signal bot stopped.")
+    logger.info("Signal bot stopped.")
