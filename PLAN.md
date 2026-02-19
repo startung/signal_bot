@@ -44,6 +44,8 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 
 20. **GitHub wiki** - Create a `wiki/` directory with four Markdown files matching GitHub wiki conventions (pushable to `<repo>.wiki.git`): `Home.md` (overview, install, quick start), `Developing-a-New-App.md` (CommandApp interface, mode support, persistence pattern), `Configuration-Reference.md` (all `.env` variables, signal-cli setup, systemd deployment), and `Architecture.md` (message flow, module responsibilities, mode system).
 
+21. **Docker support** - Add a `Dockerfile` for signaalbot and a `docker-compose.yml` that runs signaalbot alongside signal-cli as a sidecar service. signal-cli runs in daemon mode (JSON-RPC or stdio) so signaalbot can communicate with it over the network or a shared socket. Volumes for signal-cli account data, message logs, and app data. Configuration via the existing `.env` file. Update the wiki Configuration Reference with Docker deployment instructions.
+
 ## Status Key
 
 - ⬜ Not started
@@ -78,4 +80,5 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v1.2.0 release** | 🎉 |
 | 19 | Debug logging | ✅ |
 | 20 | GitHub wiki | ✅ |
-| | **v1.3.0 release** | 🎉 |
+| | **v1.3.1 release** | 🎉 |
+| 21 | Docker support | ⬜ |
