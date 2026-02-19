@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.2] - 2026-02-19
+
+### Changed
+- GitHub username updated to `startung` across README, wiki, and CLAUDE.md
+
 ## [1.3.1] - 2026-02-19
+
+### Changed
+- README trimmed to quick-start essentials; detailed docs moved to GitHub wiki
+- Wiki Home page updated to match README structure, including CLI mode example
+
+## [1.3.0] - 2026-02-19
 
 ### Added
 - Debug logging via Python stdlib `logging` throughout the codebase; enabled with `--debug` flag or `DEBUG=true` env var

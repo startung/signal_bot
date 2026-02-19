@@ -21,13 +21,13 @@ A lightweight, extensible Signal bot built in Python. It sends and receives mess
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/your-username/signaalbot.git
+git clone https://github.com/startung/signaalbot.git
 cd signaalbot
 uv sync
 cp .env.example .env
 ```
 
-Set `SIGNAL_PHONE_NUMBER` in `.env` to the phone number registered to your bot. See the [Configuration Reference](https://github.com/your-username/signaalbot/wiki/Configuration-Reference) wiki page for all options, signal-cli setup, and deployment.
+Set `SIGNAL_PHONE_NUMBER` in `.env` to the phone number registered to your bot. See the [Configuration Reference](https://github.com/startung/signaalbot/wiki/Configuration-Reference) wiki page for all options, signal-cli setup, and deployment.
 
 ## 🏃 Usage
 
@@ -80,12 +80,12 @@ uv run pytest -k "test_command"
 
 ## 📖 Wiki
 
-Full documentation is available in the [wiki](https://github.com/your-username/signaalbot/wiki):
+Full documentation is available in the [wiki](https://github.com/startung/signaalbot/wiki):
 
-- [Home](https://github.com/your-username/signaalbot/wiki/Home) - overview and quick start
-- [Configuration Reference](https://github.com/your-username/signaalbot/wiki/Configuration-Reference) - all settings, signal-cli setup, deployment
-- [Developing a New App](https://github.com/your-username/signaalbot/wiki/Developing-a-New-App) - add your own `/command` in minutes
-- [Architecture](https://github.com/your-username/signaalbot/wiki/Architecture) - how the message flow and module system work
+- [Home](https://github.com/startung/signaalbot/wiki/Home) - overview and quick start
+- [Configuration Reference](https://github.com/startung/signaalbot/wiki/Configuration-Reference) - all settings, signal-cli setup, deployment
+- [Developing a New App](https://github.com/startung/signaalbot/wiki/Developing-a-New-App) - add your own `/command` in minutes
+- [Architecture](https://github.com/startung/signaalbot/wiki/Architecture) - how the message flow and module system work
 
 ## 📄 License
 
