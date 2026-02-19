@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.2.0] - 2026-02-19
+
+### Added
+- CLI testing interface (`--cli` flag) — interactive REPL for testing the bot without signal-cli running
+- `CLI_FAKE_SENDER` constant (`+440000000000`) used as the simulated sender in CLI mode
+- CLI mode logs all messages (incoming and outgoing) to `LOG_DIR` the same as normal operation
+
 ## [1.1.1] - 2026-02-18
 
 ### Added

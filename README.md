@@ -106,12 +106,40 @@ cp .env.example .env
 # Run the bot
 uv run python -m signal_bot
 
+# Run in CLI mode (no signal-cli required — useful for testing)
+uv run python -m signal_bot --cli
+
 # Run tests
 uv run pytest
 
 # Run a single test
 uv run pytest tests/test_something.py::test_specific_function -v
 ```
+
+### CLI mode
+
+The `--cli` flag starts an interactive REPL that lets you test the bot's command routing without signal-cli running. Messages are simulated from a fixed fake sender and all logging works as normal.
+
+```
+Signaalbot CLI — bot account: +441234567890
+Simulating messages from: +440000000000
+Type a message and press Enter. Ctrl+D or empty input to quit.
+
+> /help
+[bot] Available commands: ...
+> /test hello
+[bot] olleh
+> /date start
+[bot] Entered date mode. ...
+> London
+[bot] London: Thursday 2026-02-19 10:30:00 GMT
+> /date end
+[bot] Exited date mode.
+>
+Bye.
+```
+
+> 💡 Add `+440000000000` to `ALLOWED_SENDERS` in your `.env` so CLI mode messages are not blocked by the whitelist.
 
 ## 🔧 Commands
 

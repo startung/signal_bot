@@ -38,6 +38,8 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 
 17. **Persistent date defaults** — Persist `/date set` defaults to a JSON file in a configurable `DATA_DIR` so they survive restarts.
 
+18. **CLI testing interface** — An interactive REPL mode (`--cli` flag) for testing the bot without signal-cli, simulating messages from a fake sender.
+
 ## Status Key
 
 - ⬜ Not started
@@ -68,3 +70,5 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v1.1.0 release** | 🎉 |
 | 17 | Persistent date defaults | ✅ |
 | | **v1.1.1 release** | 🎉 |
+| 18 | CLI testing interface | ✅ |
+| | **v1.2.0 release** | 🎉 |
