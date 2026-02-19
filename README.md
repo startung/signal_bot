@@ -79,12 +79,13 @@ Type a message and press Enter. Ctrl+D or empty input to quit.
 
 ## 🔧 Commands
 
-| Command | Description |
-|---|---|
-| `/test <text>` | Reverses the text you send |
-| `/date [city]` | Shows current date/time, optionally for a city |
-| `/date set City, Country` | Saves a default city for `/date` |
-| `/help` | Lists all registered commands |
+| Command | Description | Source |
+|---|---|---|
+| `/test <text>` | Reverses the text you send | |
+| `/date [city]` | Shows current date/time, optionally for a city | |
+| `/date set City, Country` | Saves a default city for `/date` | |
+| `/help` | Lists all registered commands | |
+| `/todo <cmd>` | Manages a todo list | [signaal\_todo](https://github.com/startung/signaal_todo) |
 
 ## 🧪 Testing
 

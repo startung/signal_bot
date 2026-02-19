@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.1.0] - 2026-02-19
+
+### Added
+- `todo_app.py` - a `/todo` command app that manages a todo list. Developed seperately [signaal\_todo](https://github.com/startung/signaal_todo)
+
 ## [2.0.2] - 2026-02-19
 
 ### Added

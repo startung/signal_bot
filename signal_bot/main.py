@@ -11,6 +11,7 @@ from signal_bot.router import route_command
 from signal_bot.apps.test_app import TestApp
 from signal_bot.apps.date_app import DateApp
 from signal_bot.apps.help_app import HelpApp
+from signal_bot.apps.todo_app import TodoApp
 from signal_bot.signal_cli_jsonrpc import SignalCliJsonRpc
 
 logger = logging.getLogger(__name__)
@@ -43,6 +44,7 @@ def create_bot(config: Config) -> Bot:
     bot.register_app(TestApp())
     bot.register_app(DateApp(data_dir=config.data_dir))
     bot.register_app(HelpApp(bot.registry))
+    bot.register_app(TodoApp(data_dir=config.data_dir))
     return bot
 
 

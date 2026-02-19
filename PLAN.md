@@ -24,7 +24,7 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 
 10. **Configuration** - Load settings from environment variables / `.env` file (phone number, signal-cli path, log level, etc.).
 
-11. **Todo app (example command app)** - Implement a `/todo` app as the first plugin to validate the extensibility model.
+11. **Test app (example command app)** - Implement a `/test` app as the first plugin to validate the extensibility model.
 
 12. **Deployment setup** - Add systemd service file, document production deployment, and handle graceful shutdown.
 
@@ -45,6 +45,8 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 20. **GitHub wiki** - Create a `wiki/` directory with four Markdown files matching GitHub wiki conventions (pushable to `<repo>.wiki.git`): `Home.md` (overview, install, quick start), `Developing-a-New-App.md` (CommandApp interface, mode support, persistence pattern), `Configuration-Reference.md` (all `.env` variables, signal-cli setup, systemd deployment), and `Architecture.md` (message flow, module responsibilities, mode system).
 
 21. **Docker support** - Add a `Dockerfile` for signaalbot and a `docker-compose.yml` that runs signaalbot alongside signal-cli as a sidecar service. signal-cli runs in daemon mode (JSON-RPC or stdio) so signaalbot can communicate with it over the network or a shared socket. Volumes for signal-cli account data, message logs, and app data. Configuration via the existing `.env` file. Update the wiki Configuration Reference with Docker deployment instructions.
+
+22. **Todo app** - A `/todo` command app that manages a todo list developed seperately [signaal\_todo](https://github.com/startung/signaal_todo).
 
 ## Status Key
 
@@ -85,3 +87,5 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v1.3.2 release** | 🎉 |
 | 21 | Docker support | ✅ |
 | | **v2.0.0 release** | 🎉 |
+| 22 | Todo app | ✅ |
+| | **v2.1.0 release** | 🎉 |
