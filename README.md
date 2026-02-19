@@ -7,9 +7,9 @@ A lightweight, extensible Signal bot built in Python. It sends and receives mess
 ## ✨ Features
 
 - **Send & receive** Signal messages
-- **Command routing** — messages starting with `/command` are dispatched to registered apps
-- **Message logging** — all incoming and outgoing messages are logged
-- **Extensible** — add new command apps independently without touching the core bot
+- **Command routing** - messages starting with `/command` are dispatched to registered apps
+- **Message logging** - all incoming and outgoing messages are logged
+- **Extensible** - add new command apps independently without touching the core bot
 
 ## 📦 Prerequisites
 
@@ -35,7 +35,7 @@ This project uses [signal-cli](https://github.com/AsamK/signal-cli) as a local b
 
 ### 1. Install signal-cli
 
-**Option A — Flatpak (recommended for development):**
+**Option A - Flatpak (recommended for development):**
 
 ```bash
 flatpak install flathub org.asamk.SignalCli
@@ -43,7 +43,7 @@ flatpak install flathub org.asamk.SignalCli
 
 > 💡 When using the Flatpak version, set `SIGNAL_CLI_PATH` to `flatpak run org.asamk.SignalCli` in your `.env` file.
 
-**Option B — Standalone binary (recommended for production):**
+**Option B - Standalone binary (recommended for production):**
 
 Download the latest release from the [signal-cli releases page](https://github.com/AsamK/signal-cli/releases) and extract it:
 
@@ -106,7 +106,7 @@ cp .env.example .env
 # Run the bot
 uv run python -m signal_bot
 
-# Run in CLI mode (no signal-cli required — useful for testing)
+# Run in CLI mode (no signal-cli required - useful for testing)
 uv run python -m signal_bot --cli
 
 # Run tests
@@ -121,7 +121,7 @@ uv run pytest tests/test_something.py::test_specific_function -v
 The `--cli` flag starts an interactive REPL that lets you test the bot's command routing without signal-cli running. Messages are simulated from a fixed fake sender and all logging works as normal.
 
 ```
-Signaalbot CLI — bot account: +441234567890
+Signaalbot CLI - bot account: +441234567890
 Simulating messages from: +440000000000
 Type a message and press Enter. Ctrl+D or empty input to quit.
 
@@ -200,8 +200,8 @@ class YourApp(CommandApp):
         return "A short description of what /yourcommand does"
 
     def handle(self, args: str, sender: str = "") -> str:
-        # args  — everything the user typed after /yourcommand
-        # sender — the sender's phone number (useful for per-user state)
+        # args  - everything the user typed after /yourcommand
+        # sender - the sender's phone number (useful for per-user state)
         return f"You said: {args}"
 ```
 
@@ -218,7 +218,7 @@ def create_bot(config: Config) -> Bot:
     ...
 ```
 
-That's it — your `/yourcommand` is now live and will appear in `/help` automatically.
+That's it - your `/yourcommand` is now live and will appear in `/help` automatically.
 
 ### Mode support
 
