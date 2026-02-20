@@ -1,11 +1,12 @@
 import logging
+from collections.abc import Iterator
 from signal_bot.parser import parse_command
 from signal_bot.registry import AppRegistry
 
 logger = logging.getLogger(__name__)
 
 
-def route_command(body: str, registry: AppRegistry, sender: str = "") -> str | None:
+def route_command(body: str, registry: AppRegistry, sender: str = "") -> Iterator[str] | None:
     parsed = parse_command(body)
     if parsed is None:
         return None

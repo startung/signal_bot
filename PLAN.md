@@ -48,6 +48,12 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 
 22. **Todo app** - A `/todo` command app that manages a todo list developed seperately [signaal\_todo](https://github.com/startung/signaal_todo).
 
+23. **Change handle to generator** - Change the `handle` method to a generator that yeilds a string, so we can handle apps that need to return multiple responses. 
+
+24. **Gemma3 app** - A `/gemma3` command app that allows the user to chat with the Gemma3 llm developed seperately [signaal\_gemma3](https://github.com/startung/signaal_gemma3).
+
+25. **Dutch app** - A `/dutch` command app whuich helps with learning Dutch developed seperately [signaal\_dutch](https://github.com/startung/signaal_dutch).
+
 ## Status Key
 
 - ⬜ Not started
@@ -89,3 +95,8 @@ This document tracks the development roadmap for Signaalbot. Each step will be i
 | | **v2.0.0 release** | 🎉 |
 | 22 | Todo app | ✅ |
 | | **v2.1.0 release** | 🎉 |
+| 23 | Change handle to generator | ✅ |
+| | **v2.2.0 release** | 🎉 |
+| 24 | Gemma3 app | ✅ |
+| | **v2.3.0 release** | 🎉 |
+| 25 | Dutch app | ⬜ |

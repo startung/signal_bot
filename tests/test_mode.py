@@ -14,8 +14,8 @@ class ReverseApp(CommandApp):
     def description(self) -> str:
         return "Reverses text"
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return args[::-1]
+    def handle(self, args: str, sender: str = ""):
+        yield args[::-1]
 
 
 class EchoApp(CommandApp):
@@ -27,8 +27,8 @@ class EchoApp(CommandApp):
     def description(self) -> str:
         return "Echoes text"
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return args
+    def handle(self, args: str, sender: str = ""):
+        yield args
 
 
 def make_message(body, sender="+440001111111"):

@@ -1,4 +1,5 @@
 import json
+from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -22,15 +23,18 @@ class DateApp(CommandApp):
     def description(self) -> str:
         return "Shows date/time for a city. Use /date set City, Country to save a default"
 
-    def handle(self, args: str, sender: str = "") -> str:
+    def handle(self, args: str, sender: str = "") -> Iterator[str]:
         stripped = args.strip()
         if stripped.lower().startswith("set "):
-            return self._set_default(stripped[4:].strip(), sender)
+            yield self._set_default(stripped[4:].strip(), sender)
+            return
         if stripped:
-            return self._date_for_city(stripped)
+            yield self._date_for_city(stripped)
+            return
         if sender in self._defaults:
-            return self._date_for_city(self._defaults[sender])
-        return self._format_utc()
+            yield self._date_for_city(self._defaults[sender])
+            return
+        yield self._format_utc()
 
     def _defaults_path(self) -> Path | None:
         if self._data_dir is None:

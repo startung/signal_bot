@@ -1,5 +1,6 @@
 import json
 import re
+from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -37,32 +38,32 @@ class TodoApp(CommandApp):
     def _sanitise_sender(sender: str) -> str:
         return re.sub(r"\D", "", sender)
 
-    def handle(self, args: str, sender: str = "") -> str:
+    def handle(self, args: str, sender: str = "") -> Iterator[str]:
         sender = self._sanitise_sender(sender)
         self._load(sender)
         parts = args.strip().split(maxsplit=1)
         command = parts[0].lower() if parts else ""
 
         if command == "add":
-            return self._add(parts[1] if len(parts) > 1 else "", sender)
+            yield self._add(parts[1] if len(parts) > 1 else "", sender)
         elif command == "list":
-            return self._list(parts[1] if len(parts) > 1 else "", sender)
+            yield self._list(parts[1] if len(parts) > 1 else "", sender)
         elif command == "done":
-            return self._done(parts[1] if len(parts) > 1 else "", sender)
+            yield self._done(parts[1] if len(parts) > 1 else "", sender)
         elif command == "undo":
-            return self._undo(parts[1] if len(parts) > 1 else "", sender)
+            yield self._undo(parts[1] if len(parts) > 1 else "", sender)
         elif command == "remove":
-            return self._remove(parts[1] if len(parts) > 1 else "", sender)
+            yield self._remove(parts[1] if len(parts) > 1 else "", sender)
         elif command == "clear":
-            return self._clear(sender)
+            yield self._clear(sender)
         elif command == "projects":
-            return self._projects(sender)
+            yield self._projects(sender)
         elif command == "contexts":
-            return self._contexts(sender)
+            yield self._contexts(sender)
         elif command == "report":
-            return self._report(sender)
-
-        return self.HELP_TEXT
+            yield self._report(sender)
+        else:
+            yield self.HELP_TEXT
 
     @staticmethod
     def _parse_priority(task: str) -> tuple[str | None, str]:

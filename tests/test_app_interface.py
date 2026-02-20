@@ -11,8 +11,8 @@ class ReverseApp(CommandApp):
     def description(self) -> str:
         return "Reverses text"
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return args[::-1]
+    def handle(self, args: str, sender: str = ""):
+        yield args[::-1]
 
 
 class IncompleteApp(CommandApp):
@@ -31,12 +31,12 @@ def test_app_has_name():
 
 def test_app_handle_returns_response():
     app = ReverseApp()
-    assert app.handle("hello, world!") == "!dlrow ,olleh"
+    assert list(app.handle("hello, world!")) == ["!dlrow ,olleh"]
 
 
 def test_app_handle_empty_args():
     app = ReverseApp()
-    assert app.handle("") == ""
+    assert list(app.handle("")) == [""]
 
 
 def test_incomplete_app_cannot_be_instantiated():

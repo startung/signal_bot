@@ -12,6 +12,7 @@ from signal_bot.apps.test_app import TestApp
 from signal_bot.apps.date_app import DateApp
 from signal_bot.apps.help_app import HelpApp
 from signal_bot.apps.todo_app import TodoApp
+from signal_bot.apps.gemma3_app import Gemma3App
 from signal_bot.signal_cli_jsonrpc import SignalCliJsonRpc
 
 logger = logging.getLogger(__name__)
@@ -45,6 +46,7 @@ def create_bot(config: Config) -> Bot:
     bot.register_app(DateApp(data_dir=config.data_dir))
     bot.register_app(HelpApp(bot.registry))
     bot.register_app(TodoApp(data_dir=config.data_dir))
+    bot.register_app(Gemma3App(data_dir=config.data_dir, ollama_host=config.ollama_host))
     return bot
 
 
@@ -110,14 +112,15 @@ def run_cli(config: Config) -> None:
             _cli_send(bot, sender, mode_response)
             continue
 
-        response = route_command(msg.body, bot.registry, sender=sender)
-        if response is None and sender in bot._modes:
+        responses = route_command(msg.body, bot.registry, sender=sender)
+        if responses is None and sender in bot._modes:
             app = bot.registry.get(bot._modes[sender])
             if app is not None:
-                response = app.handle(msg.body, sender=sender)
+                responses = app.handle(msg.body, sender=sender)
 
-        if response is not None:
-            _cli_send(bot, sender, response)
+        if responses is not None:
+            for r in responses:
+                _cli_send(bot, sender, r)
 
     print("Bye.")
 

@@ -14,14 +14,14 @@ def test_name_is_test():
 
 def test_reverses_text():
     app = TestApp()
-    assert app.handle("hello, world!") == "!dlrow ,olleh"
+    assert list(app.handle("hello, world!")) == ["!dlrow ,olleh"]
 
 
 def test_empty_args_returns_empty():
     app = TestApp()
-    assert app.handle("") == ""
+    assert list(app.handle("")) == [""]
 
 
 def test_reverses_single_word():
     app = TestApp()
-    assert app.handle("abc") == "cba"
+    assert list(app.handle("abc")) == ["cba"]

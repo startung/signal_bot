@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.3.0] - 2026-02-20
+
+### Added
+- `/gemma3` command app — chat with a locally hosted Gemma3 model via Ollama; streams responses line by line, persists conversation history per sender in `DATA_DIR/gemma3/`
+- `OLLAMA_HOST` config option (default: `http://localhost:11434`)
+- `ollama` and `httpx` dependencies
+- `/gemma3 clear` to reset conversation history, `/gemma3 help` for usage
+
+## [2.2.0] - 2026-02-20
+
+### Changed
+- `CommandApp.handle()` return type changed from `str` to `Iterator[str]` — apps now `yield` responses instead of returning them, enabling multi-part and streaming replies
+
 ## [2.1.0] - 2026-02-19
 
 ### Added

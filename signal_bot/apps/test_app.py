@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from signal_bot.app_interface import CommandApp
 
 
@@ -10,5 +11,5 @@ class TestApp(CommandApp):
     def description(self) -> str:
         return "Reverses the text you send"
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return args[::-1]
+    def handle(self, args: str, sender: str = "") -> Iterator[str]:
+        yield args[::-1]

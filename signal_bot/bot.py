@@ -68,13 +68,14 @@ class Bot:
             if mode_response is not None:
                 self._send_response(msg.sender, mode_response)
                 continue
-            response = route_command(msg.body, self.registry, sender=msg.sender)
-            if response is None and msg.sender in self._modes:
+            responses = route_command(msg.body, self.registry, sender=msg.sender)
+            if responses is None and msg.sender in self._modes:
                 app = self.registry.get(self._modes[msg.sender])
                 if app is not None:
                     logger.debug("Dispatching to mode app=%s for sender=%s", app.name, msg.sender)
-                    response = app.handle(msg.body, sender=msg.sender)
-            if response is not None:
-                self._send_response(msg.sender, response)
+                    responses = app.handle(msg.body, sender=msg.sender)
+            if responses is not None:
+                for r in responses:
+                    self._send_response(msg.sender, r)
             else:
                 logger.debug("No response for message from %s", msg.sender)

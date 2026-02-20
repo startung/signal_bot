@@ -12,8 +12,8 @@ class ReverseApp(CommandApp):
     def description(self) -> str:
         return "Reverses text"
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return args[::-1]
+    def handle(self, args: str, sender: str = ""):
+        yield args[::-1]
 
 
 def make_registry_with_reverse_app() -> AppRegistry:
@@ -25,7 +25,7 @@ def make_registry_with_reverse_app() -> AppRegistry:
 def test_routes_command_to_app():
     registry = make_registry_with_reverse_app()
     result = route_command("/test hello, world!", registry)
-    assert result == "!dlrow ,olleh"
+    assert list(result) == ["!dlrow ,olleh"]
 
 
 def test_non_command_returns_none():
@@ -43,4 +43,4 @@ def test_unregistered_command_returns_none():
 def test_command_with_no_args():
     registry = make_registry_with_reverse_app()
     result = route_command("/test", registry)
-    assert result == ""
+    assert list(result) == [""]

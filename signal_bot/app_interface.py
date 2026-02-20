@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections.abc import Iterator
 
 
 class CommandApp(ABC):
@@ -11,4 +12,4 @@ class CommandApp(ABC):
     def description(self) -> str: ...
 
     @abstractmethod
-    def handle(self, args: str, sender: str = "") -> str: ...
+    def handle(self, args: str, sender: str = "") -> Iterator[str]: ...

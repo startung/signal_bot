@@ -16,8 +16,8 @@ class FakeApp(CommandApp):
     def description(self) -> str:
         return self._description
 
-    def handle(self, args: str, sender: str = "") -> str:
-        return ""
+    def handle(self, args: str, sender: str = ""):
+        yield ""
 
 
 def make_registry_with_help():
@@ -43,7 +43,7 @@ def test_name_is_help():
 
 def test_lists_all_commands():
     registry, help_app = make_registry_with_help()
-    response = help_app.handle("")
+    response = "\n".join(help_app.handle(""))
     assert "/test" in response
     assert "/date" in response
     assert "/help" in response
@@ -51,7 +51,7 @@ def test_lists_all_commands():
 
 def test_includes_descriptions():
     registry, help_app = make_registry_with_help()
-    response = help_app.handle("")
+    response = "\n".join(help_app.handle(""))
     assert "Reverses text" in response
     assert "Shows date/time" in response
 
