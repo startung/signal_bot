@@ -27,68 +27,77 @@ def test_no_args_no_default_returns_utc():
     assert "UTC" in response
 
 
-def test_city_returns_local_time():
+@patch.object(DateApp, "_lookup_timezone", return_value="Europe/London")
+def test_city_returns_local_time(mock_tz):
     app = make_app()
     response = app.handle("London", sender="+440001111111")
     assert "London" in response
 
 
-def test_city_and_country_returns_local_time():
+@patch.object(DateApp, "_lookup_timezone", return_value="America/New_York")
+def test_city_and_country_returns_local_time(mock_tz):
     app = make_app()
     response = app.handle("New York, US", sender="+440001111111")
     assert "New York" in response
 
 
-def test_set_default_city():
+@patch.object(DateApp, "_lookup_timezone", return_value="Europe/London")
+def test_set_default_city(mock_tz):
     app = make_app()
     response = app.handle("set London, GB", sender="+440001111111")
     assert "London" in response
     assert "default" in response.lower()
 
 
-def test_date_uses_default_after_set():
+@patch.object(DateApp, "_lookup_timezone", return_value="Asia/Tokyo")
+def test_date_uses_default_after_set(mock_tz):
     app = make_app()
     app.handle("set Tokyo, JP", sender="+440001111111")
     response = app.handle("", sender="+440001111111")
     assert "Tokyo" in response
 
 
-def test_default_is_per_sender():
+@patch.object(DateApp, "_lookup_timezone", return_value="Asia/Tokyo")
+def test_default_is_per_sender(mock_tz):
     app = make_app()
     app.handle("set Tokyo, JP", sender="+440001111111")
     response = app.handle("", sender="+440002222222")
     assert "UTC" in response
 
 
-def test_invalid_city_returns_error():
+@patch.object(DateApp, "_lookup_timezone", return_value=None)
+def test_invalid_city_returns_error(mock_tz):
     app = make_app()
     response = app.handle("Xyzzyville", sender="+440001111111")
     assert "could not find" in response.lower() or "not found" in response.lower()
 
 
-def test_response_contains_date_components():
+@patch.object(DateApp, "_lookup_timezone", return_value="Europe/London")
+def test_response_contains_date_components(mock_tz):
     app = make_app()
     response = app.handle("London", sender="+440001111111")
-    # Should contain a recognisable date/time format
     assert ":" in response  # time separator
     assert "202" in response  # year
 
 
-def test_set_default_persists_to_file(tmp_path):
+@patch.object(DateApp, "_lookup_timezone", return_value="Europe/London")
+def test_set_default_persists_to_file(mock_tz, tmp_path):
     app = make_app(tmp_path)
     app.handle("set London, GB", sender="+440001111111")
     data = json.loads((tmp_path / "date_defaults.json").read_text())
     assert data["+440001111111"] == "London, GB"
 
 
-def test_defaults_loaded_from_file_on_init(tmp_path):
+@patch.object(DateApp, "_lookup_timezone", return_value="Asia/Tokyo")
+def test_defaults_loaded_from_file_on_init(mock_tz, tmp_path):
     (tmp_path / "date_defaults.json").write_text(json.dumps({"+440001111111": "Tokyo, JP"}))
     app = make_app(tmp_path)
     response = app.handle("", sender="+440001111111")
     assert "Tokyo" in response
 
 
-def test_no_data_dir_still_works():
+@patch.object(DateApp, "_lookup_timezone", return_value="Europe/London")
+def test_no_data_dir_still_works(mock_tz):
     app = DateApp()
     app.handle("set London, GB", sender="+440001111111")
     response = app.handle("", sender="+440001111111")
